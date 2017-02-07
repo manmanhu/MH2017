@@ -80,7 +80,7 @@
     # if(T>3.5, 1e-5, max(1e-7,min(1e-2, dt*max(0.2,1-5*(T-T_old-0.2)))))
     # if(t>0.0169, 1e-7, if(t>0.0168, 2e-6, max(1e-7,min(1e-2, dt*max(0.2, 1-5*(T-T_old-0.2))))))
     type = ParsedFunction
-    value = 2e-4 # if(t<0.07, 2e-3, 5e-4)
+    value = 1e-4 # if(t<0.07, 2e-3, 5e-4)
   [../]
   [./outer_pressure_fct]
     type = ParsedFunction
@@ -89,7 +89,7 @@
 []
 
 [Kernels]
-  active = 'mech_dissip damage_dt dt_temp damage_kernel dp_dt Chem_endo'
+  active = 'mech_dissip damage_dt Chem_endo dt_temp damage_kernel dp_dt'
   [./dp_dt]
     type = TimeDerivative
     variable = porepressure
@@ -229,8 +229,8 @@
     phi0 = 0.1
     is_mechanics_on = true
     is_chemistry_on = true
-    ar_F = 1
-    da_endo = 1
+    ar_F = 15
+    da_endo = 1e-3
   [../]
   [./plastic_material]
     type = RedbackMechMaterialDP
@@ -326,7 +326,7 @@
 []
 
 [ICs]
-  active = 'random_temp_IC'
+  active = 'random_dmg_IC'
   [./random_temp_IC]
     variable = temperature
     type = RandomIC
@@ -334,6 +334,8 @@
   [./random_dmg_IC]
     variable = damage
     type = RandomIC
+    max = 0.05
+    boundary = 0
   [../]
 []
 
