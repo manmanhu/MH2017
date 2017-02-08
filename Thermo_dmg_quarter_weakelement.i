@@ -15,7 +15,7 @@
 [MeshModifiers]
   [./weak_element]
     type = AssignElementSubdomainID
-    element_ids = '0 99'
+    element_ids = '49 50'
     subdomain_ids = '11 12'
   [../]
 []
@@ -270,7 +270,7 @@
     disp_y = disp_y
     disp_x = disp_x
     poisson_ratio = 0.15
-    youngs_modulus = 10
+    youngs_modulus = 2000
   [../]
 []
 
@@ -349,7 +349,7 @@
 [Outputs]
   exodus = true
   execute_on = 'timestep_end initial'
-  file_base = Cylinder_quarter_smooth_weakelem1
+  file_base = Cylinder_quarter_smooth_weakelem2
 []
 
 [RedbackMechAction]
