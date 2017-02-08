@@ -15,16 +15,18 @@
 [MeshModifiers]
   [./weak_element]
     type = AssignElementSubdomainID
-    element_ids = 50
-    subdomain_ids = 11
+    element_ids = '0 99'
+    subdomain_ids = '11 12'
   [../]
 []
 
 [Variables]
   active = 'temperature disp_y disp_x porepressure damage'
   [./disp_x]
+    block = '0 11 12'
   [../]
   [./disp_y]
+    block = '0 11 12'
   [../]
   [./disp_z]
     block = 0
@@ -33,9 +35,10 @@
     scaling = 1E9 # Notice the scaling, to make porepressure's kernels roughly of same magnitude as disp's kernels
   [../]
   [./damage]
+    block = '0 11 12'
   [../]
   [./temperature]
-    block = '0 1'
+    block = '0 11 12'
   [../]
 []
 
@@ -114,14 +117,17 @@
   [./damage_dt]
     type = TimeDerivative
     variable = damage
+    block = '0 11 12'
   [../]
   [./damage_kernel]
     type = RedbackDamage
     variable = damage
+    block = '0 11 12'
   [../]
   [./dt_temp]
     type = TimeDerivative
     variable = temperature
+    block = '0 11 12'
   [../]
   [./diff_temp]
     type = RedbackThermalDiffusion
@@ -131,6 +137,7 @@
   [./mech_dissip]
     type = RedbackMechDissip
     variable = temperature
+    block = '0 11 12'
   [../]
   [./Thermal_press]
     type = RedbackThermalPressurization
@@ -255,11 +262,11 @@
   [../]
   [./weak_elem]
     type = RedbackMaterial
-    block = 11
+    block = '11 12'
   [../]
   [./weak_elem_Elast]
     type = RedbackMechMaterialElastic
-    block = 11
+    block = '11 12'
     disp_y = disp_y
     disp_x = disp_x
     poisson_ratio = 0.15
