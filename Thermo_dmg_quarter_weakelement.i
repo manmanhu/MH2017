@@ -324,7 +324,7 @@
     solve_type = NEWTON
     petsc_options = '-snes_monitor   -snes_linesearch_monitor   -ksp_monitor'
     petsc_options_iname = '-ksp_type -pc_type  -snes_atol -snes_rtol -snes_max_it -ksp_max_it -ksp_atol -sub_pc_type -sub_pc_factor_shift_type'
-    petsc_options_value = 'gmres        asm        1E-10          1E-5        200                500                  1e-8        lu                      NONZERO'
+    petsc_options_value = 'gmres        asm        1E-10          1E-6        200                500                  1e-8        lu                      NONZERO'
     line_search = basic
   [../]
 []
